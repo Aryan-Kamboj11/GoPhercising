@@ -15,7 +15,7 @@ func main() {
 	file, err := os.Open("Problems.csv")
 
 	if err != nil {
-		fmt.Printf("Failed to open the file:%s\n", file)
+		fmt.Printf("Failed to open the file:%s\n", "Problems.csv")
 		os.Exit(1)
 	}
 	r := csv.NewReader(file)
@@ -26,7 +26,22 @@ func main() {
 		log.Fatal(err)
 	}
 	problems := parseLine(lines)
-	fmt.Println(problems)
+	// fmt.Println(problems)
+
+	counter := 0
+	for i, p := range problems {
+		fmt.Printf("Problem #%d:%s= \n ", i+1, p.q)
+		var answer string
+		fmt.Scanf("%s\n", &answer)
+		if answer == p.a {
+			counter++
+			fmt.Println("Correct!")
+		} else {
+			fmt.Println("Incorrect! Try again from start")
+			break
+		}
+	}
+	fmt.Printf("You score %d out of %d", counter, len(problems))
 
 }
 
